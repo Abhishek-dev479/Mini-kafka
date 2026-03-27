@@ -319,6 +319,7 @@ server.listen(8080, () => {
   console.log("Server listening on 8080");
 });
 
-app.listen(3000, () => {
-  console.log("HTTP server listening on 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`HTTP server listening on ${PORT}`);
 });

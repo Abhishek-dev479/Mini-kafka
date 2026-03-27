@@ -2,7 +2,7 @@ const net = require('net');
 const { Client } = require('./client');
 
 
-const client = new Client(8080);
+const client = new Client(8080, process.env.KAFKA_HOST || 'localhost');
 
 (async () => {
   await client.send(4, { // JOIN_GROUP

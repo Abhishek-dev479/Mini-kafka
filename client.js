@@ -1,8 +1,8 @@
 import net from 'net'
 
 export class Client {
-  constructor(port) {
-    this.socket = net.createConnection({ port });
+  constructor(port, host = 'localhost') {
+    this.socket = net.createConnection({ port, host });
     this.requestId = 1;
     this.pending = new Map();
     this.buffer = Buffer.alloc(0);

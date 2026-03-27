@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  server:
+    build: .
+    ports:
+      - "8080:8080"
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - kafka-network
+
+  producer:
+    build: .
+    command: node producer.js
+    depends_on:
+      - server
+    environment:
+      - KAFKA_HOST=server
+    networks:
+      - kafka-network
+
+  consumer:
+    build: .
+    command: node consumer.js
+    depends_on:
+      - server
+    environment:
+      - KAFKA_HOST=server
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    driver: bridge
