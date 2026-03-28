@@ -8,14 +8,21 @@ services:
       - "3000:3000"
     volumes:
       - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "sh", "-c", "nc -z 127.0.0.1 8080"]
+      interval: 1s
+      timeout: 2s
+      retries: 10
+      start_period: 5s
     networks:
       - kafka-network
 
   producer:
     build: .
-    command: node producer.js
     depends_on:
-      - server
+      server:
+        condition: service_healthy
+    command: node producer.js
     environment:
       - KAFKA_HOST=server
     networks:
@@ -25,7 +32,8 @@ services:
     build: .
     command: node consumer.js
     depends_on:
-      - server
+      server:
+        condition: service_healthy
     environment:
       - KAFKA_HOST=server
     networks:

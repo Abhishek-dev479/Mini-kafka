@@ -35,4 +35,4 @@ function handleError(producer, pending){
 });
 }
 
-export {handleResponse, handleError}
+module.exports = { handleResponse, handleError }

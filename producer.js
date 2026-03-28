@@ -1,5 +1,5 @@
-import net from 'net';
-import {Client} from './client.js ';
+const net = require('net');
+const { Client } = require('./client');
 
 const client = new Client(8080, process.env.KAFKA_HOST || 'localhost');
 

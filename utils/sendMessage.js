@@ -1,6 +1,6 @@
 let requestId = 1;
 let pending = new Map();
-export async function sendMessage(socket, type, payload) {
+async function sendMessage(socket, type, payload) {
   return new Promise((resolve, reject) => {
     const payloadBuffer = Buffer.from(JSON.stringify(payload));
 
@@ -22,3 +22,5 @@ export async function sendMessage(socket, type, payload) {
     socket.write(buffer);
   });
 }
+
+module.exports = { sendMessage };

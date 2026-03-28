@@ -1,6 +1,6 @@
-import net from 'net'
+const net = require('net');
 
-export class Client {
+class Client {
   constructor(port, host = 'localhost') {
     this.socket = net.createConnection({ port, host });
     this.requestId = 1;
@@ -71,3 +71,5 @@ export class Client {
     });
   }
 }
+
+module.exports = { Client };
